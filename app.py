@@ -9,7 +9,7 @@ if os.path.exists("env.py"):
     import env
 
 
-app = Flask (__name__)
+app = Flask(__name__)
 
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
@@ -44,7 +44,7 @@ def register():
 
         # put the new user into 'session' cookie
         session["user"] = request.form.get("username").lower()
-        flash("Registration successful!")
+        flash("Registration Successful!")
         return redirect(url_for("profile", username=session["user"]))   
     return render_template("register.html")
 
@@ -96,9 +96,12 @@ def logout():
     # remove user from session cookies
     flash("You have been logged out")
     session.pop("user")
-    return redirect(url_for ('login'))
+    return redirect(url_for('login'))
 
 
+@app.route("/add_task")
+def add_task():
+    return render_template("add_task.html")
 
 
 
